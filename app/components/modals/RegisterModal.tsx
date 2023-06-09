@@ -1,54 +1,65 @@
 'use client'
 
+import { registerUser } from '@/app/actions/user'
 import useRegisterModel from '@/app/hooks/useRegisterModel'
+
+import { zodResolver } from '@hookform/resolvers/zod'
+import { signIn } from 'next-auth/react'
+import { useCallback, useState } from 'react'
+import type { FieldValues, SubmitHandler } from 'react-hook-form'
+import { useForm } from 'react-hook-form'
+import { toast } from 'react-hot-toast'
 import { AiFillGithub } from 'react-icons/ai'
 import { FcGoogle } from 'react-icons/fc'
-import { useForm } from 'react-hook-form'
-import type { FieldValues, SubmitHandler } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
-import axios from 'axios'
-import { ReactNode, useState } from 'react'
-import Modal from './Modal'
+
+import useLoginModel from '@/app/hooks/useLoginModal'
+import Button from '../Button'
 import Heading from '../Heading'
 import Input from '../inputs/Input'
-import { toast } from 'react-hot-toast'
-import Button from '../Button'
-import { signIn } from 'next-auth/react'
+import Modal from './Modal'
 
-const RegisterFormSchema = z.object({
+const RegisterSchema = z.object({
 	name: z.string().min(3, { message: 'Name most be greater than 3 character' }),
 	email: z.string().email(),
 	password: z.string().min(6)
 })
 
+type RegisterData = z.infer<typeof RegisterSchema>
+
 const RegisterModal = () => {
 	const [isLoading, setIsLoading] = useState(false)
 	const registerModal = useRegisterModel()
+	const loginModal = useLoginModel()
 
 	const {
 		register,
 		handleSubmit,
 		formState: { errors }
 	} = useForm<FieldValues>({
-		resolver: zodResolver(RegisterFormSchema)
+		resolver: zodResolver(RegisterSchema)
 	})
 
 	const onSubmit: SubmitHandler<FieldValues> = data => {
 		setIsLoading(true)
 
-		axios
-			.post('/api/register', data)
+		registerUser(data as RegisterData)
 			.then(() => {
+				toast.success('Register complete successfully')
 				registerModal.onClose()
 			})
-			.catch(error => {
+			.catch(() => {
 				toast.error('Something went wrong')
 			})
 			.finally(() => {
 				setIsLoading(false)
 			})
 	}
+
+	const onToggle = useCallback(() => {
+		registerModal.onClose()
+		loginModal.onOpen()
+	}, [loginModal, registerModal])
 
 	const bodyContent = (
 		<div className='flex flex-col gap-3'>
@@ -112,7 +123,7 @@ const RegisterModal = () => {
 				<div className='flex flex-row items-center justify-center gap-2'>
 					<div>Already have an account?</div>
 					<div
-						onClick={registerModal.onClose}
+						onClick={onToggle}
 						className='
 							text-neutral-800
 							cursor-pointer
