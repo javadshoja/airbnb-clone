@@ -14,6 +14,7 @@ import Heading from '../Heading'
 import Input from '../inputs/Input'
 import { toast } from 'react-hot-toast'
 import Button from '../Button'
+import { signIn } from 'next-auth/react'
 
 const RegisterFormSchema = z.object({
 	name: z.string().min(3, { message: 'Name most be greater than 3 character' }),
@@ -93,13 +94,13 @@ const RegisterModal = () => {
 				outline
 				label='Continue with google'
 				icon={FcGoogle}
-				onClick={() => {}}
+				onClick={() => signIn('google')}
 			/>
 			<Button
 				outline
 				label='Continue with Github'
 				icon={AiFillGithub}
-				onClick={() => {}}
+				onClick={() => signIn('github')}
 			/>
 			<div
 				className='
