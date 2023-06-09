@@ -4,7 +4,8 @@ import './env.mjs'
 const config = {
 	reactStrictMode: true,
 	experimental: {
-		typedRoutes: true
+		typedRoutes: true,
+		serverActions: true
 	},
 	images: {
 		domains: ['avatars.githubusercontent.com', 'lh3.googleusercontent.com']
