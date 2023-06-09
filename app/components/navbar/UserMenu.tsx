@@ -1,22 +1,28 @@
 'use client'
 
-import { useCallback, useState } from 'react'
-import { AiOutlineMenu } from 'react-icons/ai'
-import Avatar from '../Avatar'
-import MenuItem from './MenuItem'
+import useLoginModel from '@/app/hooks/useLoginModal'
 import useRegisterModel from '@/app/hooks/useRegisterModel'
 
-export default function UserMenu() {
+import { User } from '@prisma/client'
+import { signOut } from 'next-auth/react'
+import { FC, useCallback, useState } from 'react'
+import { AiOutlineMenu } from 'react-icons/ai'
+
+import Avatar from '../Avatar'
+import MenuItem from './MenuItem'
+
+type UserMenuProps = {
+	currentUser?: User | null
+}
+
+const UserMenu: FC<UserMenuProps> = ({ currentUser }) => {
 	const [isOpen, setIsOpen] = useState(false)
 	const registerModal = useRegisterModel()
+	const loginModal = useLoginModel()
 
 	const toggleOpen = useCallback(() => {
 		setIsOpen(prev => !prev)
 	}, [])
-
-	const openRegisterModal = useCallback(() => {
-		registerModal.onOpen()
-	}, [registerModal])
 
 	return (
 		<div className='relative'>
@@ -57,7 +63,7 @@ export default function UserMenu() {
 				>
 					<AiOutlineMenu />
 					<div className='hidden md:block'>
-						<Avatar />
+						<Avatar src={currentUser?.image} />
 					</div>
 				</div>
 			</div>
@@ -67,7 +73,7 @@ export default function UserMenu() {
 						absolute
 						rounded-xl
 						shadow-md
-						w-[40vw]
+						w-[20vw]
 						md:w-3/4
 						bg-white
 						overflow
@@ -83,13 +89,27 @@ export default function UserMenu() {
 							cursor-pointer
 							'
 					>
-						<>
-							<MenuItem onClick={() => {}} label='Login' />
-							<MenuItem onClick={openRegisterModal} label='Sign in' />
-						</>
+						{currentUser ? (
+							<>
+								<MenuItem onClick={() => {}} label='My trips' />
+								<MenuItem onClick={() => {}} label='My favorites' />
+								<MenuItem onClick={() => {}} label='My reservation' />
+								<MenuItem onClick={() => {}} label='My properties' />
+								<MenuItem onClick={() => {}} label='Airbnb my home' />
+								<hr />
+								<MenuItem onClick={signOut} label='Logout' />
+							</>
+						) : (
+							<>
+								<MenuItem onClick={loginModal.onOpen} label='Login' />
+								<MenuItem onClick={registerModal.onOpen} label='Sign in' />
+							</>
+						)}
 					</div>
 				</div>
 			)}
 		</div>
 	)
 }
+
+export default UserMenu
