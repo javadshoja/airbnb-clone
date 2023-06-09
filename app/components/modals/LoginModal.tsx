@@ -6,7 +6,7 @@ import useRegisterModel from '@/app/hooks/useRegisterModel'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { signIn } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
-import { useState } from 'react'
+import { useCallback, useState } from 'react'
 import type { FieldValues, SubmitHandler } from 'react-hook-form'
 import { useForm } from 'react-hook-form'
 import { toast } from 'react-hot-toast'
@@ -26,8 +26,8 @@ const LoginFormSchema = z.object({
 
 const LoginModal = () => {
 	const router = useRouter()
-	const registerModal = useRegisterModel()
 	const loginModal = useLoginModel()
+	const registerModal = useRegisterModel()
 	const [isLoading, setIsLoading] = useState(false)
 
 	const {
@@ -56,6 +56,11 @@ const LoginModal = () => {
 			if (callback?.error) toast.error(callback.error)
 		})
 	}
+
+	const onToggle = useCallback(() => {
+		loginModal.onClose()
+		registerModal.onOpen()
+	}, [loginModal, registerModal])
 
 	const bodyContent = (
 		<div className='flex flex-col gap-3'>
@@ -108,16 +113,16 @@ const LoginModal = () => {
 				'
 			>
 				<div className='flex flex-row items-center justify-center gap-2'>
-					<div>Already have an account?</div>
+					<div>First time using Airbnb?</div>
 					<div
-						onClick={loginModal.onClose}
+						onClick={onToggle}
 						className='
 							text-neutral-800
 							cursor-pointer
 							hover:underline
 						'
 					>
-						Login
+						Create an account
 					</div>
 				</div>
 			</div>
