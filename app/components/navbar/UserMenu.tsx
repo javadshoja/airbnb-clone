@@ -31,15 +31,15 @@ const UserMenu: FC<UserMenuProps> = ({ currentUser }) => {
 					onClick={() => {}}
 					className='
             hidden
-            md:block
+            cursor-pointer
+            rounded-full
+            px-4
+            py-3
             text-sm
             font-semibold
-            py-3
-            px-4
-            rounded-full
-            hover:bg-neutral-100
             transition
-            cursor-pointer
+            hover:bg-neutral-100
+            md:block
         '
 				>
 					Airbnb your home
@@ -47,18 +47,18 @@ const UserMenu: FC<UserMenuProps> = ({ currentUser }) => {
 				<div
 					onClick={toggleOpen}
 					className='
-						p-4
-						md:py-1
-						md:px-2
-						border-neutral-200
 						flex
+						cursor-pointer
 						flex-row
 						items-center
 						gap-3
 						rounded-full
-						cursor-pointer
-						hover:shadow-md
+						border-neutral-200
+						p-4
 						transition
+						hover:shadow-md
+						md:px-2
+						md:py-1
         '
 				>
 					<AiOutlineMenu />
@@ -70,23 +70,23 @@ const UserMenu: FC<UserMenuProps> = ({ currentUser }) => {
 			{isOpen && (
 				<div
 					className='
-						absolute
-						rounded-xl
-						shadow-md
-						w-[20vw]
-						md:w-3/4
-						bg-white
 						overflow
-            right-0
+						absolute
+						right-0
 						top-14
-						text-sm
+						w-[20vw]
+						rounded-xl
+						bg-white
+            text-sm
+						shadow-md
+						md:w-3/4
 					'
 				>
 					<div
 						className='
 							flex
-							flex-col
 							cursor-pointer
+							flex-col
 							'
 					>
 						{currentUser ? (

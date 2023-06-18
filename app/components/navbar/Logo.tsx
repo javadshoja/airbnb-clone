@@ -10,10 +10,10 @@ export default function Logo() {
 			alt='logo'
 			className='
 				hidden
-				md:block
-				cursor-pointer
-				w-auto
 				h-auto
+				w-auto
+				cursor-pointer
+				md:block
 			'
 			width={100}
 			height={31.25}

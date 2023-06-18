@@ -60,41 +60,41 @@ const Modal: FC<ModalProps> = ({
 	return (
 		<div
 			className='
-				flex
-				justify-center
-				items-center
-				overflow-x-hidden
-				overflow-y-hidden
 				fixed
 				inset-0
 				z-50
+				flex
+				items-center
+				justify-center
+				overflow-x-hidden
+				overflow-y-hidden
+				bg-neutral-800/70
 				outline-none
 				focus:outline-none
-				bg-neutral-800/70
 			'
 		>
 			<div
 				className='
 					relative
+					mx-auto
+					my-3
+					h-auto
 					w-[98%]
+					sm:h-auto
 					sm:w-2/3
+					md:h-auto
 					md:w-1/2
+					lg:h-auto
 					lg:w-2/5
 					xl:w-2/6
-					my-3
-					mx-auto
-					h-auto
-					sm:h-auto
-					lg:h-auto
-					md:h-auto
 				'
 			>
 				{/* CONTENT */}
 				<div
 					className={`
 							translate
-							duration-300
 							h-full
+							duration-300
 							${showModal ? 'translate-y-0' : 'translate-y-full'}
 							${showModal ? 'opacity-100' : 'opacity-0'}
 						`}
@@ -102,41 +102,41 @@ const Modal: FC<ModalProps> = ({
 					<div
 						className='
 							translate
-							h-full
-							lg:h-auto
-							border-0
-							rounded-lg
-							shadow-lg
 							relative
 							flex
-							flex-col
+							h-full
 							w-full
+							flex-col
+							rounded-lg
+							border-0
 							bg-white
+							shadow-lg
 							outline-none
 							focus:outline-none
+							lg:h-auto
 						'
 					>
 						{/* HEADER */}
 						<section
 							className='
-								flex
 								item-center
-								p-3
-								rounded-t
-								justify-center
 								relative
+								flex
+								justify-center
+								rounded-t
 								border-b
+								p-3
 							'
 						>
 							<button
 								onClick={handleClose}
 								className='
-									p-1
-									border-0
-									hover:opacity-70
-									transition
 									absolute
 									left-4
+									border-0
+									p-1
+									transition
+									hover:opacity-70
 								'
 							>
 								<IoMdClose size={18} />
@@ -150,10 +150,10 @@ const Modal: FC<ModalProps> = ({
 							<div
 								className='
 									flex
+									w-full
 									flex-row
 									items-center
 									gap-2
-									w-full
 								'
 							>
 								{secondaryAction && secondaryActionLabel && (

@@ -1,6 +1,6 @@
 export default function HomePage() {
 	return (
-		<main className='text-rose-500 text-3xl'>
+		<main className='text-3xl text-rose-500'>
 			<h1>Hello Airbnb</h1>
 		</main>
 	)

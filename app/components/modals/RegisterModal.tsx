@@ -64,7 +64,7 @@ const RegisterModal = () => {
 	const bodyContent = (
 		<div className='flex flex-col gap-3'>
 			<Heading title='Welcome to Airbnb' subtitle='Create an account!' center />
-			<div className='text-sm font-semibold text-rose-500 mb-1 mx-auto'>
+			<div className='mx-auto mb-1 text-sm font-semibold text-rose-500'>
 				{errors?.name?.message?.toString() ||
 					errors?.email?.message?.toString() ||
 					errors?.password?.message?.toString()}
@@ -99,7 +99,7 @@ const RegisterModal = () => {
 	)
 
 	const footerContent = (
-		<div className='flex flex-col gap-4 mt-3'>
+		<div className='mt-3 flex flex-col gap-4'>
 			<hr />
 			<Button
 				outline
@@ -115,9 +115,9 @@ const RegisterModal = () => {
 			/>
 			<div
 				className='
-				text-neutral-500
-					text-center mt-3
-					font-light
+				mt-3
+					text-center font-light
+					text-neutral-500
 				'
 			>
 				<div className='flex flex-row items-center justify-center gap-2'>
@@ -125,8 +125,8 @@ const RegisterModal = () => {
 					<div
 						onClick={onToggle}
 						className='
-							text-neutral-800
 							cursor-pointer
+							text-neutral-800
 							hover:underline
 						'
 					>
