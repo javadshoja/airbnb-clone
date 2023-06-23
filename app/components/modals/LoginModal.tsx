@@ -7,7 +7,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { signIn } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 import { useCallback, useState } from 'react'
-import type { FieldValues, SubmitHandler } from 'react-hook-form'
+import type { SubmitHandler } from 'react-hook-form'
 import { useForm } from 'react-hook-form'
 import { toast } from 'react-hot-toast'
 import { AiFillGithub } from 'react-icons/ai'
@@ -19,10 +19,12 @@ import Heading from '../Heading'
 import Input from '../inputs/Input'
 import Modal from './Modal'
 
-const LoginFormSchema = z.object({
+const LoginSchema = z.object({
 	email: z.string().email(),
 	password: z.string().min(6)
 })
+
+type LoginData = z.infer<typeof LoginSchema>
 
 const LoginModal = () => {
 	const router = useRouter()
@@ -34,11 +36,11 @@ const LoginModal = () => {
 		register,
 		handleSubmit,
 		formState: { errors }
-	} = useForm<FieldValues>({
-		resolver: zodResolver(LoginFormSchema)
+	} = useForm<LoginData>({
+		resolver: zodResolver(LoginSchema)
 	})
 
-	const onSubmit: SubmitHandler<FieldValues> = data => {
+	const onSubmit: SubmitHandler<LoginData> = data => {
 		setIsLoading(true)
 
 		signIn('credentials', {
@@ -47,13 +49,16 @@ const LoginModal = () => {
 		}).then(callback => {
 			setIsLoading(false)
 
-			if (callback?.ok) {
-				toast.success('Logged in')
-				loginModal.onClose()
-				router.refresh()
+			if (callback?.error) {
+				toast.error(callback.error)
+				return
 			}
 
-			if (callback?.error) toast.error(callback.error)
+			if (!callback?.ok) return
+
+			toast.success('Logged in')
+			loginModal.onClose()
+			router.refresh()
 		})
 	}
 
@@ -66,15 +71,14 @@ const LoginModal = () => {
 		<div className='flex flex-col gap-3'>
 			<Heading title='Welcome back' subtitle='Login to your account!' center />
 			<div className='mx-auto mb-1 text-sm font-semibold text-rose-500'>
-				{errors?.name?.message?.toString() ||
-					errors?.email?.message?.toString() ||
+				{errors?.email?.message?.toString() ||
 					errors?.password?.message?.toString()}
 			</div>
 			<Input
 				id='email'
 				label='Email'
 				disabled={isLoading}
-				register={register}
+				register={register('email')}
 				errors={errors}
 				required
 			/>
@@ -83,7 +87,7 @@ const LoginModal = () => {
 				type='password'
 				label='Password'
 				disabled={isLoading}
-				register={register}
+				register={register('password')}
 				errors={errors}
 				required
 			/>

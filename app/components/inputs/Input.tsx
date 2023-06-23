@@ -1,7 +1,7 @@
 'use client'
 
 import type { FC } from 'react'
-import type { FieldErrors, FieldValues, UseFormRegister } from 'react-hook-form'
+import type { FieldErrors, UseFormRegisterReturn } from 'react-hook-form'
 import { BiDollar } from 'react-icons/bi'
 
 type InputProps = {
@@ -11,7 +11,7 @@ type InputProps = {
 	disabled?: boolean
 	formatPrice?: boolean
 	required?: boolean
-	register: UseFormRegister<FieldValues>
+	register: UseFormRegisterReturn<string>
 	errors: FieldErrors
 }
 
@@ -41,9 +41,10 @@ const Input: FC<InputProps> = ({
 			<input
 				id={id}
 				disabled={disabled}
-				{...register(id, { required })}
+				{...register}
 				placeholder=' '
 				type={type}
+				required={required}
 				className={`
           peer
           w-full

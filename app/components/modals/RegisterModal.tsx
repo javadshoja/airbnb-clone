@@ -6,7 +6,7 @@ import useRegisterModel from '@/app/hooks/useRegisterModel'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { signIn } from 'next-auth/react'
 import { useCallback, useState } from 'react'
-import type { FieldValues, SubmitHandler } from 'react-hook-form'
+import type { SubmitHandler } from 'react-hook-form'
 import { useForm } from 'react-hook-form'
 import { toast } from 'react-hot-toast'
 import { AiFillGithub } from 'react-icons/ai'
@@ -36,14 +36,14 @@ const RegisterModal = () => {
 		register,
 		handleSubmit,
 		formState: { errors }
-	} = useForm<FieldValues>({
+	} = useForm<RegisterData>({
 		resolver: zodResolver(RegisterSchema)
 	})
 
-	const onSubmit: SubmitHandler<FieldValues> = data => {
+	const onSubmit: SubmitHandler<RegisterData> = data => {
 		setIsLoading(true)
 
-		registerUser(data as RegisterData)
+		registerUser(data)
 			.then(() => {
 				toast.success('Register complete successfully')
 				registerModal.onClose()
@@ -73,7 +73,7 @@ const RegisterModal = () => {
 				id='name'
 				label='Name'
 				disabled={isLoading}
-				register={register}
+				register={register('name')}
 				errors={errors}
 				required
 			/>
@@ -82,16 +82,16 @@ const RegisterModal = () => {
 				id='email'
 				label='Email'
 				disabled={isLoading}
-				register={register}
 				errors={errors}
 				required
+				register={register('email')}
 			/>
 			<Input
 				id='password'
 				type='password'
 				label='Password'
 				disabled={isLoading}
-				register={register}
+				register={register('password')}
 				errors={errors}
 				required
 			/>
