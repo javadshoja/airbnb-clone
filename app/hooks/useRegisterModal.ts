@@ -1,17 +1,17 @@
 import { create } from 'zustand'
 
-type registerModelState = {
+type registerModalState = {
 	isOpen: boolean
 }
 
-type registerModelAction = {
+type registerModalAction = {
 	onOpen: () => void
 	onClose: () => void
 }
 
-type registerModelStore = registerModelState & registerModelAction
+type registerModalStore = registerModalState & registerModalAction
 
-const useRegisterModel = create<registerModelStore>(set => ({
+const useRegisterModal = create<registerModalStore>(set => ({
 	isOpen: false,
 	onOpen: () =>
 		set(() => ({
@@ -23,4 +23,4 @@ const useRegisterModel = create<registerModelStore>(set => ({
 		}))
 }))
 
-export default useRegisterModel
+export default useRegisterModal

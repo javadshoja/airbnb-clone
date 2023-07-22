@@ -1,17 +1,17 @@
 import { create } from 'zustand'
 
-type loginModelState = {
+type loginModalState = {
 	isOpen: boolean
 }
 
-type loginModelAction = {
+type loginModalAction = {
 	onOpen: () => void
 	onClose: () => void
 }
 
-type loginModelStore = loginModelState & loginModelAction
+type loginModalStore = loginModalState & loginModalAction
 
-const useLoginModel = create<loginModelStore>(set => ({
+const useLoginModal = create<loginModalStore>(set => ({
 	isOpen: false,
 	onOpen: () =>
 		set(() => ({
@@ -23,4 +23,4 @@ const useLoginModel = create<loginModelStore>(set => ({
 		}))
 }))
 
-export default useLoginModel
+export default useLoginModal

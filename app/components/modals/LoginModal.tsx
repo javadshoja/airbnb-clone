@@ -1,18 +1,19 @@
 'use client'
 
-import useLoginModel from '@/app/hooks/useLoginModal'
-import useRegisterModel from '@/app/hooks/useRegisterModel'
+import { useCallback, useState } from 'react'
 
-import { zodResolver } from '@hookform/resolvers/zod'
 import { signIn } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
-import { useCallback, useState } from 'react'
 import type { SubmitHandler } from 'react-hook-form'
 import { useForm } from 'react-hook-form'
 import { toast } from 'react-hot-toast'
 import { AiFillGithub } from 'react-icons/ai'
 import { FcGoogle } from 'react-icons/fc'
 import { z } from 'zod'
+
+import useLoginModal from '@/app/hooks/useLoginModal'
+import useRegisterModal from '@/app/hooks/useRegisterModal'
+import { zodResolver } from '@hookform/resolvers/zod'
 
 import Button from '../Button'
 import Heading from '../Heading'
@@ -28,8 +29,8 @@ type LoginData = z.infer<typeof LoginSchema>
 
 const LoginModal = () => {
 	const router = useRouter()
-	const loginModal = useLoginModel()
-	const registerModal = useRegisterModel()
+	const loginModal = useLoginModal()
+	const registerModal = useRegisterModal()
 	const [isLoading, setIsLoading] = useState(false)
 
 	const {
