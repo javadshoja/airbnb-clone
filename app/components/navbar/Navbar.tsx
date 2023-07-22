@@ -1,9 +1,11 @@
 'use client'
 
-import { User } from '@prisma/client'
 import { FC } from 'react'
 
+import { User } from '@prisma/client'
+
 import Container from '../Container'
+import Catagories from './Catagories'
 import Logo from './Logo'
 import Search from './Search'
 import UserMenu from './UserMenu'
@@ -19,9 +21,8 @@ const Navbar: FC<NavbarProps> = ({ currentUser }) => {
 				<Container>
 					<div
 						className='
-							item-center
 							flex
-							flex-row
+							items-center
 							justify-between
 							gap-3
 							md:gap-0
@@ -33,6 +34,7 @@ const Navbar: FC<NavbarProps> = ({ currentUser }) => {
 					</div>
 				</Container>
 			</div>
+			<Catagories />
 		</div>
 	)
 }
