@@ -1,3 +1,4 @@
+/** @type {import('prettier').Config} */
 module.exports = {
 	semi: false,
 	tabWidth: 2,
@@ -6,8 +7,8 @@ module.exports = {
 	singleQuote: true,
 	jsxSingleQuote: true,
 	bracketSpacing: true,
-	endOfLine: 'auto',
+	endOfLine: 'lf',
 	arrowParens: 'avoid',
-	trailingComma: 'none',
-	plugins: [require('prettier-plugin-tailwindcss')]
+	trailingComma: 'all',
+	plugins: ['prettier-plugin-tailwindcss']
 }
