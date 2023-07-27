@@ -8,7 +8,8 @@ export const env = createEnv({
 		GOOGLE_CLIENT_SECRET: z.string(),
 		GITHUB_ID: z.string(),
 		GITHUB_SECRET: z.string(),
-		NEXTAUTH_SECRET: z.string()
+		NEXTAUTH_SECRET: z.string(),
+		HIGHLIGHT_PROJECT_ID: z.string()
 		// NEXTAUTH_URL: z.string().url()
 	},
 	client: {
@@ -21,6 +22,7 @@ export const env = createEnv({
 		GITHUB_ID: process.env.GITHUB_ID,
 		GITHUB_SECRET: process.env.GITHUB_SECRET,
 		NEXTAUTH_SECRET: process.env.NEXTAUTH_SECRET,
+		HIGHLIGHT_PROJECT_ID: process.env.HIGHLIGHT_PROJECT_ID,
 		// NEXTAUTH_URL: process.env.NEXTAUTH_URL,
 		NEXT_PUBLIC_PUBLISHABLE_KEY: process.env.NEXT_PUBLIC_PUBLISHABLE_KEY
 	}
