@@ -1,11 +1,16 @@
-import { Nunito } from 'next/font/google'
-import type { ReactNode } from 'react'
-import { Toaster } from 'react-hot-toast'
 import 'tailwindcss/tailwind.css'
 
-import ClientOnly from './components/ClientOnly'
+import type { ReactNode } from 'react'
+
+import { Nunito } from 'next/font/google'
+import { Toaster } from 'react-hot-toast'
+
+import { env } from '@/env.mjs'
+import { HighlightInit } from '@highlight-run/next/highlight-init'
+
 import LoginModal from './components/modals/LoginModal'
 import RegisterModal from './components/modals/RegisterModal'
+import RentModal from './components/modals/RentModal'
 import Navbar from './components/navbar/Navbar'
 import getCurrentUser from './services/user'
 
@@ -29,16 +34,26 @@ export default async function RootLayout({
 }) {
 	const currentUser = await getCurrentUser()
 	return (
-		<html lang='en'>
-			<body className={nunito.className}>
-				<Toaster />
-				<ClientOnly>
+		<>
+			<HighlightInit
+				projectId={env.HIGHLIGHT_PROJECT_ID}
+				tracingOrigins
+				networkRecording={{
+					enabled: true,
+					recordHeadersAndBody: true,
+					urlBlocklist: []
+				}}
+			/>
+			<html lang='en'>
+				<body className={nunito.className}>
+					<Toaster />
+					<RentModal />
 					<LoginModal />
 					<RegisterModal />
 					<Navbar currentUser={currentUser} />
-				</ClientOnly>
-				{children}
-			</body>
-		</html>
+					{children}
+				</body>
+			</html>
+		</>
 	)
 }
