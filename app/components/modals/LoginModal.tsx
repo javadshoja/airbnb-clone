@@ -20,12 +20,12 @@ import Heading from '../Heading'
 import Input from '../inputs/Input'
 import Modal from './Modal'
 
-const LoginSchema = z.object({
+const LoginFormSchema = z.object({
 	email: z.string().email(),
 	password: z.string().min(6)
 })
 
-type LoginData = z.infer<typeof LoginSchema>
+type LoginFormValues = z.infer<typeof LoginFormSchema>
 
 const LoginModal = () => {
 	const router = useRouter()
@@ -37,30 +37,31 @@ const LoginModal = () => {
 		register,
 		handleSubmit,
 		formState: { errors }
-	} = useForm<LoginData>({
-		resolver: zodResolver(LoginSchema)
+	} = useForm<LoginFormValues>({
+		resolver: zodResolver(LoginFormSchema)
 	})
 
-	const onSubmit: SubmitHandler<LoginData> = data => {
+	const onSubmit: SubmitHandler<LoginFormValues> = async data => {
 		setIsLoading(true)
 
-		signIn('credentials', {
+		const res = await signIn('credentials', {
 			...data,
 			redirect: false
-		}).then(callback => {
-			setIsLoading(false)
-
-			if (callback?.error) {
-				toast.error(callback.error)
-				return
-			}
-
-			if (!callback?.ok) return
-
-			toast.success('Logged in')
-			loginModal.onClose()
-			router.refresh()
 		})
+
+		setIsLoading(false)
+
+		if (res?.error) {
+			console.error(res.error)
+			toast.error('Something went wrong')
+			return
+		}
+
+		if (!res?.ok) return
+
+		toast.success('Logged in')
+		loginModal.onClose()
+		router.refresh()
 	}
 
 	const onToggle = useCallback(() => {
