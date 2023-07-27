@@ -13,6 +13,7 @@ import { z } from 'zod'
 import { registerUser } from '@/app/actions/user'
 import useLoginModal from '@/app/hooks/useLoginModal'
 import useRegisterModal from '@/app/hooks/useRegisterModal'
+import { trytm } from '@bdsqqq/try'
 import { zodResolver } from '@hookform/resolvers/zod'
 
 import Button from '../Button'
@@ -20,13 +21,13 @@ import Heading from '../Heading'
 import Input from '../inputs/Input'
 import Modal from './Modal'
 
-const RegisterSchema = z.object({
+const RegisterFormSchema = z.object({
 	name: z.string().min(3, { message: 'Name most be greater than 3 character' }),
 	email: z.string().email(),
 	password: z.string().min(6)
 })
 
-type RegisterData = z.infer<typeof RegisterSchema>
+type RegisterFormValues = z.infer<typeof RegisterFormSchema>
 
 const RegisterModal = () => {
 	const [isLoading, setIsLoading] = useState(false)
@@ -37,24 +38,24 @@ const RegisterModal = () => {
 		register,
 		handleSubmit,
 		formState: { errors }
-	} = useForm<RegisterData>({
-		resolver: zodResolver(RegisterSchema)
+	} = useForm<RegisterFormValues>({
+		resolver: zodResolver(RegisterFormSchema)
 	})
 
-	const onSubmit: SubmitHandler<RegisterData> = data => {
+	const onSubmit: SubmitHandler<RegisterFormValues> = async data => {
 		setIsLoading(true)
 
-		registerUser(data)
-			.then(() => {
-				toast.success('Register complete successfully')
-				registerModal.onClose()
-			})
-			.catch(() => {
-				toast.error('Something went wrong')
-			})
-			.finally(() => {
-				setIsLoading(false)
-			})
+		const [, error] = await trytm(registerUser(data))
+
+		if (error) {
+			console.error(error)
+			toast.error('Something went wrong')
+		} else {
+			toast.success('Register complete successfully')
+			registerModal.onClose()
+		}
+
+		setIsLoading(false)
 	}
 
 	const onToggle = useCallback(() => {
