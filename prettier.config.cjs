@@ -9,6 +9,6 @@ module.exports = {
 	bracketSpacing: true,
 	endOfLine: 'lf',
 	arrowParens: 'avoid',
-	trailingComma: 'all',
+	trailingComma: 'none',
 	plugins: ['prettier-plugin-tailwindcss']
 }
