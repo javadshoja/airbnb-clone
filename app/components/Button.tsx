@@ -2,6 +2,7 @@
 
 import type { FC, MouseEvent } from 'react'
 import type { IconType } from 'react-icons'
+import { cn } from '../libs/utils'
 
 type ButtonProps = {
 	label: string
@@ -23,22 +24,35 @@ const Button: FC<ButtonProps> = ({
 		<button
 			onClick={onClick}
 			disabled={disabled}
-			className={`
+			className={cn(
+				`
         relative
         w-full
         rounded-lg
-        transition
-        hover:opacity-80
-        disabled:cursor-not-allowed
-        disabled:opacity-70
-        ${outline ? 'bg-white' : 'bg-rose-500'}
-        ${outline ? 'border-black' : 'border-rose-500'}
-        ${outline ? 'text-black' : 'text-white'}
-        ${small ? 'py-1' : 'py-3'}
-        ${small ? 'text-sm' : 'text-base'}
-        ${small ? 'font-light' : 'font-semibold'}
-        ${small ? 'border' : 'border-2'}
-      `}
+				transition
+				hover:opacity-80
+				disabled:cursor-not-allowed
+				disabled:opacity-70
+      `,
+				`
+				border-2
+        border-rose-500
+        bg-rose-500
+        py-3
+        text-base
+        font-semibold
+        text-white
+			`,
+				{
+					border: small,
+					'border-black': outline,
+					'bg-white': outline,
+					'py-1': small,
+					'text-sm': small,
+					'font-light': small,
+					'text-black': outline
+				}
+			)}
 		>
 			{Icon && (
 				<Icon

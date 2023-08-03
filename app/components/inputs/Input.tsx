@@ -1,8 +1,11 @@
 'use client'
 
 import type { FC } from 'react'
+
 import type { FieldErrors, UseFormRegisterReturn } from 'react-hook-form'
 import { BiDollar } from 'react-icons/bi'
+
+import { cn } from '@/app/libs/utils'
 
 type InputProps = {
 	id: string
@@ -45,7 +48,8 @@ const Input: FC<InputProps> = ({
 				placeholder=' '
 				type={type}
 				required={required}
-				className={`
+				className={cn(
+					`
           peer
           w-full
           rounded-md
@@ -56,16 +60,25 @@ const Input: FC<InputProps> = ({
           font-light
           outline-none
           transition
-          disabled:cursor-not-allowed
+					disabled:cursor-not-allowed
           disabled:opacity-70
-          ${formatPrice ? 'pl-9' : 'pl-4'}
-          ${errors[id] ? 'border-rose-500' : 'border-neutral-300'}
-          ${errors[id] ? 'focus:border-rose-500' : 'focus:border-black'}
-        `}
+        `,
+					`
+          border-neutral-300
+          pl-4
+          focus:border-black
+				`,
+					{
+						'border-rose-500': errors[id],
+						'pl-9': formatPrice,
+						'focus:border-rose-500': errors[id]
+					}
+				)}
 			/>
 			<label
 				htmlFor={id}
-				className={`
+				className={cn(
+					`
           absolute
           top-5
           z-10
@@ -74,13 +87,20 @@ const Input: FC<InputProps> = ({
 					transform
 					text-sm
 					duration-150
-					${formatPrice ? 'left-9' : 'left-4'}
 					peer-placeholder-shown:translate-y-0
 					peer-placeholder-shown:scale-100
 					peer-focus:-translate-y-5
 					peer-focus:scale-75
-					${errors[id] ? 'text-rose-500' : 'text-zinc-400'}
-        `}
+        `,
+					`
+					left-4
+					text-zinc-400
+				`,
+					{
+						'left-9': formatPrice,
+						'text-rose-500': errors[id]
+					}
+				)}
 			>
 				{label}
 			</label>

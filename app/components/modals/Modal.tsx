@@ -2,7 +2,11 @@
 
 import type { FC, ReactElement } from 'react'
 import { useCallback, useEffect, useState } from 'react'
+
 import { IoMdClose } from 'react-icons/io'
+
+import { cn } from '@/app/libs/utils'
+
 import Button from '../Button'
 
 type ModalProps = {
@@ -91,13 +95,21 @@ const Modal: FC<ModalProps> = ({
 			>
 				{/* CONTENT */}
 				<div
-					className={`
+					className={cn(
+						`
 							translate
 							h-full
 							duration-300
-							${showModal ? 'translate-y-0' : 'translate-y-full'}
-							${showModal ? 'opacity-100' : 'opacity-0'}
-						`}
+						`,
+						`
+							translate-y-full
+							opacity-0
+						`,
+						{
+							'translate-y-0': showModal,
+							'opacity-100': showModal
+						}
+					)}
 				>
 					<div
 						className='

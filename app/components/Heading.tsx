@@ -1,4 +1,5 @@
 import type { FC } from 'react'
+import { cn } from '../libs/utils'
 
 type HeadingProps = {
 	title: string
@@ -8,7 +9,7 @@ type HeadingProps = {
 
 const Heading: FC<HeadingProps> = ({ title, subtitle, center }) => {
 	return (
-		<div className={center ? 'text-center' : 'text-start'}>
+		<div className={cn('text-start', { 'text-center': center })}>
 			<div className='text-2xl font-bold'>{title}</div>
 			<div className='mt-2 font-light text-neutral-500'>{subtitle}</div>
 		</div>

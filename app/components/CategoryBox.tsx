@@ -6,6 +6,8 @@ import { useRouter, useSearchParams } from 'next/navigation'
 import qs from 'query-string'
 import { IconType } from 'react-icons'
 
+import { cn } from '../libs/utils'
+
 type CategoryBoxProps = {
 	icon: IconType
 	label: string
@@ -40,7 +42,8 @@ const CategoryBox: FC<CategoryBoxProps> = ({ icon: Icon, label, selected }) => {
 	return (
 		<div
 			onClick={handleClick}
-			className={`
+			className={cn(
+				`
         flex
         cursor-pointer
         flex-col
@@ -50,10 +53,17 @@ const CategoryBox: FC<CategoryBoxProps> = ({ icon: Icon, label, selected }) => {
         border-b-2
         p-3
 				transition
-        hover:text-neutral-800
-        ${selected ? 'border-neutral-800' : 'border-transparent'}
-        ${selected ? 'text-neutral-800' : 'text-neutral-500'}
-      `}
+			hover:text-neutral-800
+      `,
+				`
+				border-transparent
+				text-neutral-500
+			`,
+				{
+					'border-neutral-800': selected,
+					'text-neutral-800': selected
+				}
+			)}
 		>
 			<Icon size={22} />
 			<div className='text-sm font-medium'>{label}</div>
