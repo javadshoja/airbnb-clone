@@ -13,7 +13,8 @@ export const env = createEnv({
 		// NEXTAUTH_URL: z.string().url()
 	},
 	client: {
-		NEXT_PUBLIC_PUBLISHABLE_KEY: z.string().min(1)
+		NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME: z.string(),
+		NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET: z.string()
 	},
 	runtimeEnv: {
 		DATABASE_URL: process.env.DATABASE_URL,
@@ -24,6 +25,9 @@ export const env = createEnv({
 		NEXTAUTH_SECRET: process.env.NEXTAUTH_SECRET,
 		HIGHLIGHT_PROJECT_ID: process.env.HIGHLIGHT_PROJECT_ID,
 		// NEXTAUTH_URL: process.env.NEXTAUTH_URL,
-		NEXT_PUBLIC_PUBLISHABLE_KEY: process.env.NEXT_PUBLIC_PUBLISHABLE_KEY
+		NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME:
+			process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME,
+		NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET:
+			process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET
 	}
 })
