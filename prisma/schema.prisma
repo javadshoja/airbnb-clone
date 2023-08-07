@@ -45,30 +45,21 @@ model Account {
   @@unique([provider, providerAccountId])
 }
 
-model Category {
-  id          String @id @default(auto()) @map("_id") @db.ObjectId
-  title       String
-  description String
-
-  listings Listing[]
-}
-
 model Listing {
-  id            String   @id @default(uuid()) @map("_id") @db.ObjectId
+  id            String   @id @default(auto()) @map("_id") @db.ObjectId
   title         String
   description   String
   imageSrc      String
   createdAt     DateTime @default(now())
+  category      String
   roomCount     Int
   bathroomCount Int
   guestCount    Int
   locationValue String
   price         Int
   userId        String   @db.ObjectId
-  categoryId    String   @db.ObjectId
 
-  user     User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  category Category @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   reservation Reservation[]
 }
