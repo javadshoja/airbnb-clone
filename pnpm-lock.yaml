@@ -47,6 +47,9 @@ dependencies:
   next-auth:
     specifier: ^4.22.3
     version: 4.22.3(next@13.4.12)(react-dom@18.2.0)(react@18.2.0)
+  next-cloudinary:
+    specifier: ^4.17.1
+    version: 4.17.1(next@13.4.12)(react@18.2.0)
   query-string:
     specifier: ^8.1.0
     version: 8.1.0
@@ -202,6 +205,29 @@ packages:
 
   /@bdsqqq/try@2.3.1:
     resolution: {integrity: sha512-P3HbUpmXW/99xGD26xl4eMVmne3NZ1C4sQ8u17YPkWRW34RoNHjbRdHwgxKmszqTm/4Ah7zVdf1XQ5d+QYUzlg==}
+    dev: false
+
+  /@cloudinary-util/url-loader@3.10.0:
+    resolution: {integrity: sha512-RNp6WayU6e5ikA7yCRqNhp0lOwLl82vLco9EwpES2si6Hb+g9yEaeTYvobD44ISQeJUnPl6e1c/AEYVSjfzwrg==}
+    dependencies:
+      '@cloudinary-util/util': 2.2.1
+      '@cloudinary/url-gen': 1.11.1
+    dev: false
+
+  /@cloudinary-util/util@2.2.1:
+    resolution: {integrity: sha512-MEIqn5WtPP3mxSMTNNfpqlGS1UquAXcjmVdY/t/edD/ZWVjI85viBiOMIuF0W6n6UF5gTstLymfQNYx0YO/GZg==}
+    dev: false
+
+  /@cloudinary/transformation-builder-sdk@1.5.1:
+    resolution: {integrity: sha512-7pTKgyrX49T3Qk0+bE/RN7bijGVRPusDXjRHJyO5a7H6CnL1sZ/TvTMAKvXweFLTOpWzWFW6nS0Bah3kBvTb7w==}
+    dependencies:
+      '@cloudinary/url-gen': 1.11.1
+    dev: false
+
+  /@cloudinary/url-gen@1.11.1:
+    resolution: {integrity: sha512-j5nYZOMeB4Ht1W8C6RXEvVNJVME1sObxtdgtnJDiGcBQmwI1EsCedSQSzkJoely3jhx+yI6WGCLGniF/PE+Idw==}
+    dependencies:
+      '@cloudinary/transformation-builder-sdk': 1.5.1
     dev: false
 
   /@emotion/babel-plugin@11.11.0:
@@ -4352,6 +4378,18 @@ packages:
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
       uuid: 8.3.2
+    dev: false
+
+  /next-cloudinary@4.17.1(next@13.4.12)(react@18.2.0):
+    resolution: {integrity: sha512-d3XZrz/u6GSrXKeWuypDwFj/YIw/kztau8yI3sZbapIAqrgrXfFF3MwQCGFUeCdNsTDLoDWZK8rQfOZ1OKJ5Fw==}
+    peerDependencies:
+      next: ^12 || ^13
+      react: ^17 || ^18
+    dependencies:
+      '@cloudinary-util/url-loader': 3.10.0
+      '@cloudinary-util/util': 2.2.1
+      next: 13.4.12(@opentelemetry/api@1.4.1)(react-dom@18.2.0)(react@18.2.0)
+      react: 18.2.0
     dev: false
 
   /next@13.4.12(@opentelemetry/api@1.4.1)(react-dom@18.2.0)(react@18.2.0):
