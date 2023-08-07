@@ -1,12 +1,15 @@
 'use client'
 
-import useLoginModel from '@/app/hooks/useLoginModal'
-import useRegisterModel from '@/app/hooks/useRegisterModel'
+import type { FC } from 'react'
+import { useState } from 'react'
 
-import { User } from '@prisma/client'
 import { signOut } from 'next-auth/react'
-import { FC, useCallback, useState } from 'react'
 import { AiOutlineMenu } from 'react-icons/ai'
+
+import useLoginModal from '@/app/hooks/useLoginModal'
+import useRegisterModal from '@/app/hooks/useRegisterModal'
+import useRentModal from '@/app/hooks/useRentModal'
+import { User } from '@prisma/client'
 
 import Avatar from '../Avatar'
 import MenuItem from './MenuItem'
@@ -17,18 +20,23 @@ type UserMenuProps = {
 
 const UserMenu: FC<UserMenuProps> = ({ currentUser }) => {
 	const [isOpen, setIsOpen] = useState(false)
-	const registerModal = useRegisterModel()
-	const loginModal = useLoginModel()
+	const registerModal = useRegisterModal()
+	const loginModal = useLoginModal()
+	const rentModal = useRentModal()
 
-	const toggleOpen = useCallback(() => {
-		setIsOpen(prev => !prev)
-	}, [])
+	const toggleOpen = () => setIsOpen(prev => !prev)
+
+	const onRent = () => {
+		if (!currentUser) return loginModal.onOpen()
+
+		rentModal.onOpen()
+	}
 
 	return (
 		<div className='relative'>
 			<div className='flex flex-row items-center gap-3'>
 				<div
-					onClick={() => {}}
+					onClick={onRent}
 					className='
             hidden
             cursor-pointer
@@ -95,7 +103,7 @@ const UserMenu: FC<UserMenuProps> = ({ currentUser }) => {
 								<MenuItem onClick={() => {}} label='My favorites' />
 								<MenuItem onClick={() => {}} label='My reservation' />
 								<MenuItem onClick={() => {}} label='My properties' />
-								<MenuItem onClick={() => {}} label='Airbnb my home' />
+								<MenuItem onClick={rentModal.onOpen} label='Airbnb my home' />
 								<hr />
 								<MenuItem onClick={signOut} label='Logout' />
 							</>
