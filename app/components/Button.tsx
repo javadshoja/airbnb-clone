@@ -1,12 +1,12 @@
 'use client'
 
-import type { FC, MouseEvent } from 'react'
+import type { FC, MouseEventHandler } from 'react'
 import type { IconType } from 'react-icons'
 import { cn } from '../libs/utils'
 
 type ButtonProps = {
 	label: string
-	onClick: (e: MouseEvent<HTMLButtonElement>) => void
+	onClick: MouseEventHandler<HTMLButtonElement>
 	disabled?: boolean
 	outline?: boolean
 	small?: boolean
