@@ -11,8 +11,8 @@ import { FcGoogle } from 'react-icons/fc'
 import { z } from 'zod'
 
 import { registerUser } from '@/app/actions/user'
-import useLoginModal from '@/app/hooks/useLoginModal'
-import useRegisterModal from '@/app/hooks/useRegisterModal'
+import useLoginModal from '@/hooks/useLoginModal'
+import useRegisterModal from '@/hooks/useRegisterModal'
 import { trytm } from '@bdsqqq/try'
 import { zodResolver } from '@hookform/resolvers/zod'
 

@@ -6,7 +6,7 @@ import { useMemo } from 'react'
 import Select from 'react-select'
 import { z } from 'zod'
 
-import useCountries from '@/app/hooks/useCountries'
+import useCountries from '@/hooks/useCountries'
 import { CountrySchema } from '@/app/libs/schemas'
 
 export type CountrySelectValue = z.infer<typeof CountrySchema>

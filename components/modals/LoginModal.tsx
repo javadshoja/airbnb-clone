@@ -11,8 +11,8 @@ import { AiFillGithub } from 'react-icons/ai'
 import { FcGoogle } from 'react-icons/fc'
 import { z } from 'zod'
 
-import useLoginModal from '@/app/hooks/useLoginModal'
-import useRegisterModal from '@/app/hooks/useRegisterModal'
+import useLoginModal from '@/hooks/useLoginModal'
+import useRegisterModal from '@/hooks/useRegisterModal'
 import { zodResolver } from '@hookform/resolvers/zod'
 
 import Button from '../Button'

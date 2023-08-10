@@ -6,9 +6,9 @@ import { useState } from 'react'
 import { signOut } from 'next-auth/react'
 import { AiOutlineMenu } from 'react-icons/ai'
 
-import useLoginModal from '@/app/hooks/useLoginModal'
-import useRegisterModal from '@/app/hooks/useRegisterModal'
-import useRentModal from '@/app/hooks/useRentModal'
+import useLoginModal from '@/hooks/useLoginModal'
+import useRegisterModal from '@/hooks/useRegisterModal'
+import useRentModal from '@/hooks/useRentModal'
 import type { SafeUser } from '@/types'
 
 import Avatar from '../Avatar'
