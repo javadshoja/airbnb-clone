@@ -1,6 +1,6 @@
-import Container from './components/Container'
-import EmptyState from './components/EmptyState'
-import ListingCard from './components/listings/ListingCard'
+import Container from '@/components/Container'
+import EmptyState from '@/components/EmptyState'
+import ListingCard from '@/components/listings/ListingCard'
 import { getListings } from './services/listing'
 import getCurrentUser from './services/user'
 

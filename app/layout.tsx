@@ -9,10 +9,10 @@ import { Toaster } from 'react-hot-toast'
 import { env } from '@/env.mjs'
 import { HighlightInit } from '@highlight-run/next/highlight-init'
 
-import LoginModal from './components/modals/LoginModal'
-import RegisterModal from './components/modals/RegisterModal'
-import RentModal from './components/modals/RentModal'
-import Navbar from './components/navbar/Navbar'
+import LoginModal from '@/components/modals/LoginModal'
+import RegisterModal from '@/components/modals/RegisterModal'
+import RentModal from '@/components/modals/RentModal'
+import Navbar from '@/components/navbar/Navbar'
 import getCurrentUser from './services/user'
 
 export const metadata = {
