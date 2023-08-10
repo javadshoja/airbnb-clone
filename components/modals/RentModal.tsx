@@ -10,7 +10,7 @@ import { z } from 'zod'
 
 import { createListing } from '@/app/actions/listing'
 import useRentModal from '@/hooks/useRentModal'
-import { ListingSchema } from '@/app/libs/schemas'
+import { ListingSchema } from '@/libs/schemas'
 import { trytm } from '@bdsqqq/try'
 import { zodResolver } from '@hookform/resolvers/zod'
 

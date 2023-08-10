@@ -5,7 +5,7 @@ import type { FC } from 'react'
 import type { FieldErrors, UseFormRegisterReturn } from 'react-hook-form'
 import { BiDollar } from 'react-icons/bi'
 
-import { cn } from '@/app/libs/utils'
+import { cn } from '@/libs/utils'
 
 type InputProps = {
 	id: string

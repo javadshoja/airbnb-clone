@@ -4,7 +4,7 @@ import type { FC } from 'react'
 
 import { IconType } from 'react-icons'
 
-import { cn } from '@/app/libs/utils'
+import { cn } from '@/libs/utils'
 
 type CategoryInputProps = {
 	label: string

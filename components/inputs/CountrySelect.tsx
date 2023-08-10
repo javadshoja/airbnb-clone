@@ -7,7 +7,7 @@ import Select from 'react-select'
 import { z } from 'zod'
 
 import useCountries from '@/hooks/useCountries'
-import { CountrySchema } from '@/app/libs/schemas'
+import { CountrySchema } from '@/libs/schemas'
 
 export type CountrySelectValue = z.infer<typeof CountrySchema>
 

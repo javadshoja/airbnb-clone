@@ -5,7 +5,7 @@ import { useCallback, useEffect, useState } from 'react'
 
 import { IoMdClose } from 'react-icons/io'
 
-import { cn } from '@/app/libs/utils'
+import { cn } from '@/libs/utils'
 
 import Button from '../Button'
 
