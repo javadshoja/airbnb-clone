@@ -9,13 +9,13 @@ import { AiOutlineMenu } from 'react-icons/ai'
 import useLoginModal from '@/app/hooks/useLoginModal'
 import useRegisterModal from '@/app/hooks/useRegisterModal'
 import useRentModal from '@/app/hooks/useRentModal'
-import { User } from '@prisma/client'
+import type { SafeUser } from '@/types'
 
 import Avatar from '../Avatar'
 import MenuItem from './MenuItem'
 
 type UserMenuProps = {
-	currentUser?: User | null
+	currentUser?: SafeUser | null
 }
 
 const UserMenu: FC<UserMenuProps> = ({ currentUser }) => {
@@ -61,7 +61,8 @@ const UserMenu: FC<UserMenuProps> = ({ currentUser }) => {
 						items-center
 						gap-3
 						rounded-full
-						border-neutral-200
+						border
+						border-neutral-200	
 						p-4
 						transition
 						hover:shadow-md
