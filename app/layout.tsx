@@ -6,14 +6,13 @@ import type { ReactNode } from 'react'
 import { Nunito } from 'next/font/google'
 import { Toaster } from 'react-hot-toast'
 
-import { env } from '@/env.mjs'
-import { HighlightInit } from '@highlight-run/next/highlight-init'
-
 import LoginModal from '@/components/modals/LoginModal'
 import RegisterModal from '@/components/modals/RegisterModal'
 import RentModal from '@/components/modals/RentModal'
 import Navbar from '@/components/navbar/Navbar'
-import getCurrentUser from './services/user'
+import { env } from '@/env.mjs'
+import getCurrentUser from '@/services/user'
+import { HighlightInit } from '@highlight-run/next/highlight-init'
 
 export const metadata = {
 	title: 'Airbnb',

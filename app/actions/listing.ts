@@ -3,7 +3,7 @@
 import { zact } from 'zact/server'
 
 import prisma from '@/libs/db'
-import getCurrentUser from '@/app/services/user'
+import getCurrentUser from '@/services/user'
 import { ListingSchema } from '@/libs/schemas'
 
 export const createListing = zact(ListingSchema)(async ({

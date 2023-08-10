@@ -1,5 +1,5 @@
 import { trytm } from '@bdsqqq/try'
-import prisma from '../../libs/db'
+import prisma from '../libs/db'
 
 export async function getListings() {
 	const [listings, error] = await trytm(
