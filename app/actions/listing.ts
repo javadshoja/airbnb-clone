@@ -2,7 +2,7 @@
 
 import { zact } from 'zact/server'
 
-import prisma from '@/libs/prismadb'
+import prisma from '@/libs/db'
 import getCurrentUser from '@/app/services/user'
 import { ListingSchema } from '@/libs/schemas'
 

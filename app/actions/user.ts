@@ -1,6 +1,6 @@
 'use server'
 
-import prisma from '@/libs/prismadb'
+import prisma from '@/libs/db'
 
 import bcrypt from 'bcrypt'
 import { zact } from 'zact/server'

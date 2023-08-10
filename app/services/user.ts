@@ -1,6 +1,6 @@
 import { trytm } from '@bdsqqq/try'
 
-import db from '@/libs/prismadb'
+import db from '@/libs/db'
 import { getSession } from './session'
 
 export default async function getCurrentUser() {

@@ -1,4 +1,4 @@
-import prisma from '@/libs/prismadb'
+import prisma from '@/libs/db'
 import { env } from '@/env.mjs'
 import { PrismaAdapter } from '@next-auth/prisma-adapter'
 import bcrypt from 'bcrypt'
