@@ -18,7 +18,7 @@ import { IoDiamond } from 'react-icons/io5'
 import CategoryBox from '../CategoryBox'
 import Container from '../Container'
 
-export const catagories = [
+export const categories = [
 	{
 		label: 'Beach',
 		icon: TbBeach,
@@ -96,7 +96,7 @@ export const catagories = [
 	}
 ]
 
-const Catagories = () => {
+const Categories = () => {
 	const params = useSearchParams()
 	const category = params?.get('category')
 	const pathname = usePathname()
@@ -116,7 +116,7 @@ const Catagories = () => {
           pt-4
         '
 			>
-				{catagories.map(item => (
+				{categories.map(item => (
 					<CategoryBox
 						key={item.label}
 						label={item.label}
@@ -128,4 +128,4 @@ const Catagories = () => {
 		</Container>
 	)
 }
-export default Catagories
+export default Categories

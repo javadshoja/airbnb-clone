@@ -20,7 +20,7 @@ import Counter from '../inputs/Counter'
 import CountrySelect from '../inputs/CountrySelect'
 import ImageUpload from '../inputs/ImageUpload'
 import Input from '../inputs/Input'
-import { catagories } from '../navbar/Catagories'
+import { categories } from '../navbar/Categories'
 import Modal from './Modal'
 
 enum STEPS {
@@ -145,7 +145,7 @@ const RentModal = () => {
 					md:grid-cols-2
 				'
 			>
-				{catagories.map(item => (
+				{categories.map(item => (
 					<div key={item.label} className='col-span-1'>
 						<CategoryInput
 							onClick={category => setCustomValue('category', category)}
