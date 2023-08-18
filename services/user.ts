@@ -1,6 +1,6 @@
 import { trytm } from '@bdsqqq/try'
 
-import db from '@/libs/db'
+import prisma from '@/libs/db'
 import { getSession } from './session'
 
 export default async function getCurrentUser() {
@@ -8,16 +8,19 @@ export default async function getCurrentUser() {
 
 	if (!session?.user?.email) return null
 
-	const [currentUser] = await trytm(
-		db.user.findUnique({
+	const [currentUser, error] = await trytm(
+		prisma.user.findUnique({
 			where: {
 				email: session.user.email as string
 			}
 		})
 	)
 
+	if (error) console.error(error)
+
 	if (!currentUser) return null
 
+	// Safe User
 	return {
 		...currentUser,
 		createdAt: currentUser.createdAt.toISOString(),
