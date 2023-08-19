@@ -19,3 +19,10 @@ export const ListingSchema = z.object({
 	title: z.string(),
 	description: z.string()
 })
+
+export const ReservationSchema = z.object({
+	totalPrice: z.number(),
+	startDate: z.date(),
+	endDate: z.date(),
+	listingId: z.string()
+})
