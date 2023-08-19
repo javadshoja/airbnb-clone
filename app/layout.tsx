@@ -12,7 +12,6 @@ import RentModal from '@/components/modals/RentModal'
 import Navbar from '@/components/navbar/Navbar'
 import { env } from '@/env.mjs'
 import getCurrentUser from '@/services/user'
-import { HighlightInit } from '@highlight-run/next/highlight-init'
 
 export const metadata = {
 	title: 'Airbnb',
@@ -34,26 +33,15 @@ export default async function RootLayout({
 }) {
 	const currentUser = await getCurrentUser()
 	return (
-		<>
-			<HighlightInit
-				projectId={env.HIGHLIGHT_PROJECT_ID}
-				tracingOrigins
-				networkRecording={{
-					enabled: true,
-					recordHeadersAndBody: true,
-					urlBlocklist: []
-				}}
-			/>
-			<html lang='en'>
-				<body className={nunito.className}>
-					<Toaster />
-					<RentModal />
-					<LoginModal />
-					<RegisterModal />
-					<Navbar currentUser={currentUser} />
-					<div className='mt-52'>{children}</div>
-				</body>
-			</html>
-		</>
+		<html lang='en'>
+			<body className={nunito.className}>
+				<Toaster />
+				<RentModal />
+				<LoginModal />
+				<RegisterModal />
+				<Navbar currentUser={currentUser} />
+				<div className='pb-20 pt-28'>{children}</div>
+			</body>
+		</html>
 	)
 }
