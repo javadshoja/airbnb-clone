@@ -1,18 +1,21 @@
 'use client'
 
 import type { FC, MouseEventHandler } from 'react'
-import { useCallback, useMemo } from 'react'
-import type { Listing, Reservation } from '@prisma/client'
-import type { SafeUser } from '@/types'
-import { useRouter } from 'next/navigation'
-import useCountries from '@/hooks/useCountries'
+import { memo, useCallback, useMemo } from 'react'
+
 import { format } from 'date-fns'
 import Image from 'next/image'
-import HeartButton from '../HeartButton'
+import { useRouter } from 'next/navigation'
+
+import useCountries from '@/hooks/useCountries'
+import type { SafeListing, SafeUser } from '@/types'
+import type { Reservation } from '@prisma/client'
+
 import Button from '../Button'
+import HeartButton from '../HeartButton'
 
 type ListingCardProps = {
-	listing: Listing
+	listing: SafeListing
 	reservation?: Reservation
 	currentUser: SafeUser | null
 	disabled?: boolean
@@ -113,4 +116,4 @@ const ListingCard: FC<ListingCardProps> = ({
 		</div>
 	)
 }
-export default ListingCard
+export default memo(ListingCard)
