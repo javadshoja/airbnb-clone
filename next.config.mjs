@@ -4,7 +4,6 @@ import './env.mjs'
 const config = {
 	reactStrictMode: true,
 	experimental: {
-		typedRoutes: true,
 		serverActions: true
 	},
 	images: {
