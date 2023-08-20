@@ -8,15 +8,14 @@ import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 
 import useCountries from '@/hooks/useCountries'
-import type { SafeListing, SafeUser } from '@/types'
-import type { Reservation } from '@prisma/client'
+import type { SafeListing, SafeReservation, SafeUser } from '@/types'
 
 import Button from '../Button'
 import HeartButton from '../HeartButton'
 
 type ListingCardProps = {
 	listing: SafeListing
-	reservation?: Reservation
+	reservation?: SafeReservation
 	currentUser: SafeUser | null
 	disabled?: boolean
 	onAction?: (id: string) => void
