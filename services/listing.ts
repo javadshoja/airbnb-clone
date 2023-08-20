@@ -2,19 +2,19 @@ import { trytm } from '@bdsqqq/try'
 import prisma from '../libs/db'
 
 export async function getListings() {
-	const [listings, error] = await trytm(
-		prisma.listing.findMany({
+	try {
+		const listings = await prisma.listing.findMany({
 			orderBy: { createdAt: 'desc' }
 		})
-	)
 
-	if (error) console.error(error)
-
-	// Safe Listings
-	return listings?.map(listing => ({
-		...listing,
-		createdAt: listing.createdAt.toISOString()
-	}))
+		// Safe Listings
+		return listings.map(listing => ({
+			...listing,
+			createdAt: listing.createdAt.toISOString()
+		}))
+	} catch (error: any) {
+		throw new Error(error)
+	}
 }
 
 type getListingByIdParams = { listingId?: string }

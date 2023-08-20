@@ -8,7 +8,7 @@ export default async function HomePage() {
 	const listings = await getListings()
 	const currentUser = await getCurrentUser()
 
-	if (listings?.length === 0) {
+	if (listings.length === 0) {
 		return <EmptyState showReset />
 	}
 	return (
@@ -26,7 +26,7 @@ export default async function HomePage() {
 					2xl:grid-cols-6
 					'
 			>
-				{listings?.map(listing => (
+				{listings.map(listing => (
 					<ListingCard
 						key={listing.id}
 						listing={listing}
