@@ -4,12 +4,13 @@ import { zact } from 'zact/server'
 import prisma from '@/libs/db'
 import getCurrentUser from '@/services/user'
 import { ReservationSchema } from '@/libs/schemas'
+import { z } from 'zod'
 
 export const createReservation = zact(ReservationSchema)(async ({
 	totalPrice,
 	startDate,
 	endDate,
-	listingId,
+	listingId
 }) => {
 	const currentUser = await getCurrentUser()
 	return await prisma.reservation.create({
@@ -18,7 +19,21 @@ export const createReservation = zact(ReservationSchema)(async ({
 			startDate,
 			endDate,
 			listingId,
-			userId: currentUser?.id!,
+			userId: currentUser?.id!
+		}
+	})
+})
+
+export const deleteReservation = zact(z.string())(async id => {
+	const currentUser = await getCurrentUser()
+
+	return await prisma.reservation.deleteMany({
+		where: {
+			id,
+			OR: [
+				{ userId: currentUser?.id },
+				{ listing: { userId: currentUser?.id } }
+			]
 		}
 	})
 })
