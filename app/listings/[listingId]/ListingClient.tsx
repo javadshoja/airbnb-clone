@@ -28,7 +28,7 @@ type ListingClientProps = {
 		user: SafeUser
 	}
 	currentUser?: SafeUser | null
-	reservations?: SafeReservation[] | null
+	reservations?: SafeReservation[]
 }
 
 const ListingClient: FC<ListingClientProps> = ({
@@ -76,7 +76,7 @@ const ListingClient: FC<ListingClientProps> = ({
 		} else {
 			toast.success('Listing reserved!')
 			setDateRange(initialDateRange)
-			router.refresh()
+			router.push('/trip')
 		}
 
 		setIsLoading(false)

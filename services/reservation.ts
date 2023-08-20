@@ -1,5 +1,4 @@
 import prisma from '@/libs/db'
-import { trytm } from '@bdsqqq/try'
 
 type GetReservationParams = {
 	listingId?: string
@@ -20,8 +19,8 @@ export async function getReservations({
 
 	if (authorId) query.listingId = { userId: authorId }
 
-	const [reservations, error] = await trytm(
-		prisma.reservation.findMany({
+	try {
+		const reservations = await prisma.reservation.findMany({
 			where: query,
 			include: {
 				listing: true
@@ -30,21 +29,19 @@ export async function getReservations({
 				createdAt: 'desc'
 			}
 		})
-	)
 
-	if (error) console.error(error)
-
-	if (!reservations) return null
-
-	// Safe Reservations
-	return reservations.map(reservation => ({
-		...reservation,
-		createdAt: reservation.createdAt.toISOString(),
-		startDate: reservation.startDate.toISOString(),
-		endDate: reservation.endDate.toISOString(),
-		listing: {
-			...reservation.listing,
-			createdAt: reservation.listing.createdAt.toDateString()
-		}
-	}))
+		// Safe Reservations
+		return reservations.map(reservation => ({
+			...reservation,
+			createdAt: reservation.createdAt.toISOString(),
+			startDate: reservation.startDate.toISOString(),
+			endDate: reservation.endDate.toISOString(),
+			listing: {
+				...reservation.listing,
+				createdAt: reservation.listing.createdAt.toDateString()
+			}
+		}))
+	} catch (error: any) {
+		throw new Error(error)
+	}
 }
