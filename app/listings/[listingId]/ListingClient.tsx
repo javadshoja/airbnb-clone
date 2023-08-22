@@ -76,7 +76,7 @@ const ListingClient: FC<ListingClientProps> = ({
 		} else {
 			toast.success('Listing reserved!')
 			setDateRange(initialDateRange)
-			router.push('/trip')
+			router.push('/trips')
 		}
 
 		setIsLoading(false)
