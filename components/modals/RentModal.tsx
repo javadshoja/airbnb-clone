@@ -124,10 +124,15 @@ const RentModal = () => {
 		setIsLoading(false)
 	}
 
-	const actionLabel = () => (step === STEPS.PRICE ? 'Create' : 'Next')
+	const actionLabel = useMemo(
+		() => (step === STEPS.PRICE ? 'Create' : 'Next'),
+		[step]
+	)
 
-	const secondaryActionLabel = () =>
-		step === STEPS.CATEGORY ? undefined : 'Back'
+	const secondaryActionLabel = useMemo(
+		() => (step === STEPS.CATEGORY ? undefined : 'Back'),
+		[step]
+	)
 
 	let bodyContent = (
 		<div className='flex flex-col gap-8'>
@@ -284,8 +289,8 @@ const RentModal = () => {
 			isOpen={rentModal.isOpen}
 			onClose={rentModal.onClose}
 			onSubmit={handleSubmit(onSubmit)}
-			actionLabel={actionLabel()}
-			secondaryActionLabel={secondaryActionLabel()}
+			actionLabel={actionLabel}
+			secondaryActionLabel={secondaryActionLabel}
 			secondaryAction={step === STEPS.CATEGORY ? undefined : onBack}
 			body={bodyContent}
 		/>
