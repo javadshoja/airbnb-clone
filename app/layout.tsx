@@ -9,8 +9,8 @@ import { Toaster } from 'react-hot-toast'
 import LoginModal from '@/components/modals/LoginModal'
 import RegisterModal from '@/components/modals/RegisterModal'
 import RentModal from '@/components/modals/RentModal'
+import SearchModal from '@/components/modals/SearchModal'
 import Navbar from '@/components/navbar/Navbar'
-import { env } from '@/env.mjs'
 import getCurrentUser from '@/services/user'
 
 export const metadata = {
@@ -36,6 +36,7 @@ export default async function RootLayout({
 		<html lang='en'>
 			<body className={nunito.className}>
 				<Toaster />
+				<SearchModal />
 				<RentModal />
 				<LoginModal />
 				<RegisterModal />
