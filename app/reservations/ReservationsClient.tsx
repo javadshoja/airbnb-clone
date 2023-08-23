@@ -13,6 +13,7 @@ import type { SafeReservation, SafeUser } from '@/types'
 import { trytm } from '@bdsqqq/try'
 
 import { deleteReservation } from '../actions/reservation'
+import Grid from '@/components/Grid'
 
 type ReservationsClientProps = {
 	reservations: SafeReservation[]
@@ -46,18 +47,7 @@ const ReservationsClient: FC<ReservationsClientProps> = ({
 	return (
 		<Container>
 			<Heading title='Reservations' subtitle='Bookings on your properties' />
-			<div
-				className='
-					grid
-					grid-cols-1
-					gap-8
-					sm:grid-cols-2
-					md:grid-cols-3
-					lg:grid-cols-4
-					xl:grid-cols-5
-					2xl:grid-cols-6
-				'
-			>
+			<Grid>
 				{reservations.map(reservation => (
 					<ListingCard
 						key={reservation.id}
@@ -70,7 +60,7 @@ const ReservationsClient: FC<ReservationsClientProps> = ({
 						currentUser={currentUser}
 					/>
 				))}
-			</div>
+			</Grid>
 		</Container>
 	)
 }
