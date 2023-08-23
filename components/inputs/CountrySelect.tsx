@@ -27,6 +27,7 @@ const CountrySelect: FC<CountrySelectProps> = ({ value, onChange }) => {
 				placeholder='Anywhere'
 				isClearable
 				options={options}
+				value={value}
 				onChange={value => onChange(value as CountrySelectValue)}
 				formatOptionLabel={option => (
 					<div className='flex items-center gap-3'>
