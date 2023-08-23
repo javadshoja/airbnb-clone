@@ -1,31 +1,27 @@
+import type { FC } from 'react'
+
 import Container from '@/components/Container'
 import EmptyState from '@/components/EmptyState'
+import Grid from '@/components/Grid'
 import ListingCard from '@/components/listings/ListingCard'
-import { getListings } from '@/services/listing'
+import { getListings, getListingsParams } from '@/services/listing'
 import getCurrentUser from '@/services/user'
 
-export default async function HomePage() {
-	const listings = await getListings()
+type HomeProps = {
+	searchParams: getListingsParams
+}
+
+const HomePage: FC<HomeProps> = async ({ searchParams }) => {
+	const listings = await getListings(searchParams)
 	const currentUser = await getCurrentUser()
 
 	if (listings.length === 0) {
 		return <EmptyState showReset />
 	}
+
 	return (
 		<Container>
-			<div
-				className='
-					grid
-					grid-cols-1
-					gap-8
-					pt-24
-					sm:grid-cols-2
-					md:grid-cols-3
-					lg:grid-cols-4
-					xl:grid-cols-5
-					2xl:grid-cols-6
-					'
-			>
+			<Grid className='pt-24'>
 				{listings.map(listing => (
 					<ListingCard
 						key={listing.id}
@@ -33,7 +29,9 @@ export default async function HomePage() {
 						currentUser={currentUser}
 					/>
 				))}
-			</div>
+			</Grid>
 		</Container>
 	)
 }
+
+export default HomePage
