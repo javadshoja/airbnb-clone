@@ -7,6 +7,7 @@ import { useRouter } from 'next/navigation'
 import { toast } from 'react-hot-toast'
 
 import Container from '@/components/Container'
+import Grid from '@/components/Grid'
 import Heading from '@/components/Heading'
 import ListingCard from '@/components/listings/ListingCard'
 import type { SafeReservation, SafeUser } from '@/types'
@@ -16,7 +17,7 @@ import { deleteReservation } from '../actions/reservation'
 
 type TripsClientProps = {
 	reservations: SafeReservation[]
-	currentUser?: SafeUser | null
+	currentUser: SafeUser | null
 }
 
 const TripsClient: FC<TripsClientProps> = ({ reservations, currentUser }) => {
@@ -44,19 +45,7 @@ const TripsClient: FC<TripsClientProps> = ({ reservations, currentUser }) => {
 				title='Trips'
 				subtitle="Where you've been and where you're going"
 			/>
-			<div
-				className='
-          xl:grid-col-5
-          2xl:grid-col-6
-          mt-10
-          grid
-          grid-cols-1
-          gap-8
-          sm:grid-cols-2
-          md:grid-cols-3
-          lg:grid-cols-4
-        '
-			>
+			<Grid className='mt-10'>
 				{reservations?.map(reservation => (
 					<ListingCard
 						key={reservation.id}
@@ -66,10 +55,10 @@ const TripsClient: FC<TripsClientProps> = ({ reservations, currentUser }) => {
 						onAction={onCancel}
 						disabled={deletingId === reservation.id}
 						actionLabel='Cancel reservation'
-						currentUser={currentUser!}
+						currentUser={currentUser}
 					/>
 				))}
-			</div>
+			</Grid>
 		</Container>
 	)
 }
