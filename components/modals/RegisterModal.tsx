@@ -53,6 +53,7 @@ const RegisterModal = () => {
 		} else {
 			toast.success('Register complete successfully')
 			registerModal.onClose()
+			loginModal.onOpen()
 		}
 
 		setIsLoading(false)
