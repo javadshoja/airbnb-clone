@@ -1,7 +1,7 @@
 'use client'
 
 import type { FC } from 'react'
-import { useState } from 'react'
+import { Suspense, useState } from 'react'
 
 import { useRouter } from 'next/navigation'
 import { toast } from 'react-hot-toast'
@@ -46,18 +46,20 @@ const TripsClient: FC<TripsClientProps> = ({ reservations, currentUser }) => {
 				subtitle="Where you've been and where you're going"
 			/>
 			<Grid className='mt-10'>
-				{reservations?.map(reservation => (
-					<ListingCard
-						key={reservation.id}
-						listing={reservation.listing}
-						reservation={reservation}
-						actionId={reservation.id}
-						onAction={onCancel}
-						disabled={deletingId === reservation.id}
-						actionLabel='Cancel reservation'
-						currentUser={currentUser}
-					/>
-				))}
+				<Suspense>
+					{reservations?.map(reservation => (
+						<ListingCard
+							key={reservation.id}
+							listing={reservation.listing}
+							reservation={reservation}
+							actionId={reservation.id}
+							onAction={onCancel}
+							disabled={deletingId === reservation.id}
+							actionLabel='Cancel reservation'
+							currentUser={currentUser}
+						/>
+					))}
+				</Suspense>
 			</Grid>
 		</Container>
 	)

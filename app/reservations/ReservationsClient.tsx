@@ -1,7 +1,7 @@
 'use client'
 
 import type { FC } from 'react'
-import { useCallback, useState } from 'react'
+import { Suspense, useCallback, useState } from 'react'
 
 import { useRouter } from 'next/navigation'
 import { toast } from 'react-hot-toast'
@@ -48,18 +48,20 @@ const ReservationsClient: FC<ReservationsClientProps> = ({
 		<Container>
 			<Heading title='Reservations' subtitle='Bookings on your properties' />
 			<Grid>
-				{reservations.map(reservation => (
-					<ListingCard
-						key={reservation.id}
-						listing={reservation.listing}
-						reservation={reservation}
-						actionId={reservation.id}
-						onAction={onCancel}
-						disabled={deletingId === reservation.id}
-						actionLabel='Cancel guest reservation'
-						currentUser={currentUser}
-					/>
-				))}
+				<Suspense>
+					{reservations.map(reservation => (
+						<ListingCard
+							key={reservation.id}
+							listing={reservation.listing}
+							reservation={reservation}
+							actionId={reservation.id}
+							onAction={onCancel}
+							disabled={deletingId === reservation.id}
+							actionLabel='Cancel guest reservation'
+							currentUser={currentUser}
+						/>
+					))}
+				</Suspense>
 			</Grid>
 		</Container>
 	)

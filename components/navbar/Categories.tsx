@@ -1,3 +1,7 @@
+'use client'
+
+import { Suspense } from 'react'
+
 import { usePathname, useSearchParams } from 'next/navigation'
 import { BsSnow } from 'react-icons/bs'
 import { FaSkiing } from 'react-icons/fa'
@@ -11,9 +15,9 @@ import {
 	GiIsland,
 	GiWindmill
 } from 'react-icons/gi'
+import { IoDiamond } from 'react-icons/io5'
 import { MdOutlineVilla } from 'react-icons/md'
 import { TbBeach, TbMountain, TbPool } from 'react-icons/tb'
-import { IoDiamond } from 'react-icons/io5'
 
 import CategoryBox from '../CategoryBox'
 import Container from '../Container'
@@ -116,14 +120,16 @@ const Categories = () => {
           pt-4
         '
 			>
-				{categories.map(item => (
-					<CategoryBox
-						key={item.label}
-						label={item.label}
-						icon={item.icon}
-						selected={category === item.label}
-					/>
-				))}
+				<Suspense>
+					{categories.map(item => (
+						<CategoryBox
+							key={item.label}
+							label={item.label}
+							icon={item.icon}
+							selected={category === item.label}
+						/>
+					))}
+				</Suspense>
 			</div>
 		</Container>
 	)

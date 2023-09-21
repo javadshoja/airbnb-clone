@@ -1,6 +1,6 @@
 'use client'
 
-import type { FC } from 'react'
+import { Suspense, type FC } from 'react'
 
 import Container from '../Container'
 import Categories from './Categories'
@@ -28,12 +28,16 @@ const Navbar: FC<NavbarProps> = ({ currentUser }) => {
 						'
 					>
 						<Logo />
-						<Search />
+						<Suspense>
+							<Search />
+						</Suspense>
 						<UserMenu currentUser={currentUser} />
 					</div>
 				</Container>
 			</div>
-			<Categories />
+			<Suspense>
+				<Categories />
+			</Suspense>
 		</div>
 	)
 }

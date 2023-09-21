@@ -1,7 +1,7 @@
 import 'tailwindcss/tailwind.css'
 import './globals.css'
 
-import type { ReactNode } from 'react'
+import { Suspense, type ReactNode } from 'react'
 
 import { Nunito } from 'next/font/google'
 import { Toaster } from 'react-hot-toast'
@@ -32,11 +32,14 @@ export default async function RootLayout({
 	children: ReactNode
 }) {
 	const currentUser = await getCurrentUser()
+
 	return (
 		<html lang='en'>
 			<body className={nunito.className}>
 				<Toaster />
-				<SearchModal />
+				<Suspense>
+					<SearchModal />
+				</Suspense>
 				<RentModal />
 				<LoginModal />
 				<RegisterModal />

@@ -1,6 +1,6 @@
 'use client'
 
-import type { FC } from 'react'
+import { Suspense, type FC } from 'react'
 
 import Container from '@/components/Container'
 import Grid from '@/components/Grid'
@@ -28,13 +28,15 @@ const FavoritesClient: FC<FavoritesClientProps> = ({
           mt-10
         '
 			>
-				{listings.map(listing => (
-					<ListingCard
-						key={listing.id}
-						currentUser={currentUser}
-						listing={listing}
-					/>
-				))}
+				<Suspense>
+					{listings.map(listing => (
+						<ListingCard
+							key={listing.id}
+							currentUser={currentUser}
+							listing={listing}
+						/>
+					))}
+				</Suspense>
 			</Grid>
 		</Container>
 	)
